@@ -6,93 +6,120 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #1e1e1e;
+      background-color: #121212;
       color: #fff;
       text-align: center;
-      padding-top: 100px;
+      padding: 60px 20px;
     }
     h1 {
+      font-size: 40px;
       color: #00ff88;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 18px;
+      color: #ccc;
+      margin-bottom: 40px;
     }
     .button {
       background-color: #00ff88;
-      color: black;
-      padding: 15px 30px;
-      margin: 20px;
+      color: #000;
+      padding: 14px 28px;
       font-size: 18px;
+      margin: 10px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
+      transition: 0.3s;
     }
     .button:hover {
       background-color: #00cc66;
     }
-    #mode-selection, #purchase-options {
+    .section {
       display: none;
-      margin-top: 30px;
+      margin-top: 40px;
     }
-    .mode-button, .item-button {
-      background-color: #444;
-      color: white;
-      padding: 10px 20px;
+    .option-button {
+      background-color: #333;
+      color: #fff;
+      padding: 12px 24px;
       margin: 10px;
       font-size: 16px;
       border: 1px solid #00ff88;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
     }
-    .mode-button:hover, .item-button:hover {
+    .option-button:hover {
       background-color: #00ff88;
-      color: black;
+      color: #000;
     }
   </style>
 </head>
 <body>
-  <h1>Witaj na <strong>XBShop</strong>!</h1>
-  <p>Kup rangę, skrzynię lub pakiet startowy do gry Minecraft</p>
 
-  <button class="button" onclick="alert('Wybierz rangę z dostępnych opcji poniżej')">Kup Rangę</button>
+  <h1>Witaj na <strong>XBShop</strong>!</h1>
+  <p>Kup rangę, skrzynię lub pakiet do gry Minecraft</p>
+
+  <button class="button" onclick="showRanks()">Kup Rangę</button>
   <button class="button" onclick="showModes()">Kup Skrzynię</button>
 
-  <div id="mode-selection">
-    <h2>Wybierz tryb gry:</h2>
-    <button class="mode-button" onclick="selectMode('SkyGen')">SkyGen</button>
-    <button class="mode-button" onclick="selectMode('BoxPvP')">BoxPvP</button>
-    <button class="mode-button" onclick="selectMode('Survival')">Survival</button>
+  <div id="rank-section" class="section">
+    <h2>Wybierz rangę:</h2>
+    <button class="option-button" onclick="purchase('VIP')">VIP</button>
+    <button class="option-button" onclick="purchase('SVIP')">SVIP</button>
+    <button class="option-button" onclick="purchase('UVIP')">UVIP</button>
+    <button class="option-button" onclick="purchase('Lagger')">Lagger</button>
+    <button class="option-button" onclick="purchase('Lagger+')">Lagger+</button>
   </div>
 
-  <div id="purchase-options">
-    <h2>Wybierz produkt do kupienia:</h2>
-    <button class="item-button" onclick="purchase('Skrzynia Startowa')">Skrzynia Startowa</button>
-    <button class="item-button" onclick="purchase('Skrzynia Premium')">Skrzynia Premium</button>
-    <button class="item-button" onclick="purchase('Skrzynia Legend')">Skrzynia Legend</button>
-    <br>
-    <button class="item-button" onclick="purchase('VIP')">Ranga VIP</button>
-    <button class="item-button" onclick="purchase('SVIP')">Ranga SVIP</button>
-    <button class="item-button" onclick="purchase('UVIP')">Ranga UVIP</button>
-    <button class="item-button" onclick="purchase('Lagger')">Ranga Lagger</button>
-    <button class="item-button" onclick="purchase('Lagger+')">Ranga Lagger+</button>
+  <div id="mode-section" class="section">
+    <h2>Wybierz tryb gry:</h2>
+    <button class="option-button" onclick="selectMode('SkyGen')">SkyGen</button>
+    <button class="option-button" onclick="selectMode('BoxPvP')">BoxPvP</button>
+    <button class="option-button" onclick="selectMode('Survival')">Survival</button>
+  </div>
+
+  <div id="crate-section" class="section">
+    <h2>Wybierz skrzynię do kupienia (<span id="mode-label"></span>):</h2>
+    <button class="option-button" onclick="purchaseCrate('Skrzynia Startowa')">Skrzynia Startowa</button>
+    <button class="option-button" onclick="purchaseCrate('Skrzynia Premium')">Skrzynia Premium</button>
+    <button class="option-button" onclick="purchaseCrate('Skrzynia Legend')">Skrzynia Legend</button>
   </div>
 
   <script>
     let selectedMode = "";
 
+    function hideAll() {
+      document.getElementById('rank-section').style.display = 'none';
+      document.getElementById('mode-section').style.display = 'none';
+      document.getElementById('crate-section').style.display = 'none';
+    }
+
+    function showRanks() {
+      hideAll();
+      document.getElementById('rank-section').style.display = 'block';
+    }
+
     function showModes() {
-      console.log("showModes()");  // dodałem debug, żeby widzieć w konsoli
-      document.getElementById('mode-selection').style.display = 'block';
-      document.getElementById('purchase-options').style.display = 'none';
+      hideAll();
+      document.getElementById('mode-section').style.display = 'block';
     }
 
     function selectMode(mode) {
       selectedMode = mode;
-      document.getElementById('mode-selection').style.display = 'none';
-      document.getElementById('purchase-options').style.display = 'block';
+      document.getElementById('mode-label').textContent = mode;
+      document.getElementById('mode-section').style.display = 'none';
+      document.getElementById('crate-section').style.display = 'block';
     }
 
     function purchase(item) {
-      alert("Kupiono: " + item + " na tryb: " + selectedMode + " (Wkrótce dodamy płatności i automatyczne nadanie rangi)");
-      // Później tu będzie fetch/post do backendu
+      alert("Kupiono: " + item + " (Wkrótce dodamy płatności)");
+    }
+
+    function purchaseCrate(crate) {
+      alert("Kupiono: " + crate + " na tryb: " + selectedMode);
     }
   </script>
+
 </body>
 </html>
