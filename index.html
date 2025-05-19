@@ -2,101 +2,54 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>XBShop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XBacon - Rangi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      background: #121212;
-      color: white;
-      font-family: sans-serif;
-      text-align: center;
-      padding: 50px;
-    }
-    .button {
-      padding: 15px 30px;
-      margin: 10px;
-      background: #00ff88;
-      color: #000;
-      font-weight: bold;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    .hidden {
-      display: none;
-    }
     .option-button {
-      background: #333;
-      border: 1px solid #00ff88;
-      padding: 10px 20px;
-      color: #fff;
-      margin: 5px;
-      cursor: pointer;
-      border-radius: 6px;
+      transition: transform 0.2s, background-color 0.3s;
     }
     .option-button:hover {
-      background: #00ff88;
-      color: black;
+      transform: scale(1.05);
     }
   </style>
 </head>
-<body>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col">
+  <!-- Navigation -->
+  <nav class="bg-gray-800 p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-green-400">XBacon</h1>
+      <div class="space-x-4">
+        <a href="index.html" class="text-green-400 font-semibold">Rangi</a>
+        <a href="crates.html" class="text-white hover:text-green-400">Skrzynki i Pakiety</a>
+      </div>
+    </div>
+  </nav>
 
-  <h1>Witaj na XBShop</h1>
-  <p>Kup rangę lub skrzynię</p>
+  <!-- Main Content -->
+  <main class="container mx-auto p-8 flex-grow flex flex-col items-center justify-center">
+    <h2 class="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">Witaj na XBacon!</h2>
+    <p class="text-lg mb-8 text-gray-300">Kup rangę i wesprzyj nasz serwer Minecraft!</p>
 
-  <button class="button" onclick="showRanks()">Kup Rangę</button>
-  <button class="button" onclick="showModes()">Kup Skrzynię</button>
+    <div id="rank-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl">
+      <button class="option-button bg-gray-700 border-2 border-green-400 text-white py-4 px-6 rounded-lg hover:bg-green-400 hover:text-black" onclick="purchase('VIP')">VIP - 10 PLN</button>
+      <button class="option-button bg-gray-700 border-2 border-green-400 text-white py-4 px-6 rounded-lg hover:bg-green-400 hover:text-black" onclick="purchase('SVIP')">SVIP - 20 PLN</button>
+      <button class="option-button bg-gray-700 border-2 border-green-400 text-white py-4 px-6 rounded-lg hover:bg-green-400 hover:text-black" onclick="purchase('UVIP')">UVIP - 30 PLN</button>
+      <button class="option-button bg-gray-700 border-2 border-green-400 text-white py-4 px-6 rounded-lg hover:bg-green-400 hover:text-black" onclick="purchase('Lagger')">Lagger - 50 PLN</button>
+      <button class="option-button bg-gray-700 border-2 border-green-400 text-white py-4 px-6 rounded-lg hover:bg-green-400 hover:text-black" onclick="purchase('Lagger+')">Lagger+ - 75 PLN</button>
+    </div>
+  </main>
 
-  <div id="rank-section" class="hidden">
-    <h2>Rangi:</h2>
-    <button class="option-button" onclick="purchase('VIP')">VIP</button>
-    <button class="option-button" onclick="purchase('SVIP')">SVIP</button>
-    <button class="option-button" onclick="purchase('UVIP')">UVIP</button>
-    <button class="option-button" onclick="purchase('Lagger')">Lagger</button>
-    <button class="option-button" onclick="purchase('Lagger+')">Lagger+</button>
-  </div>
-
-  <div id="mode-section" class="hidden">
-    <h2>Wybierz tryb:</h2>
-    <button class="option-button" onclick="selectMode('SkyGen')">SkyGen</button>
-    <button class="option-button" onclick="selectMode('BoxPvP')">BoxPvP</button>
-    <button class="option-button" onclick="selectMode('Survival')">Survival</button>
-  </div>
-
-  <div id="crate-section" class="hidden">
-    <h2>Skrzynki dla trybu <span id="mode-name"></span>:</h2>
-    <button class="option-button" onclick="purchase('Skrzynia Startowa')">Startowa</button>
-    <button class="option-button" onclick="purchase('Skrzynia Premium')">Premium</button>
-    <button class="option-button" onclick="purchase('Skrzynia Legend')">Legend</button>
-  </div>
+  <!-- Footer -->
+  <footer class="bg-gray-800 p-4 text-center text-gray-400">
+    <p>&copy; 2025 XBacon. Wszystkie prawa zastrzeżone.</p>
+  </footer>
 
   <script>
-    function hideAll() {
-      document.getElementById("rank-section").classList.add("hidden");
-      document.getElementById("mode-section").classList.add("hidden");
-      document.getElementById("crate-section").classList.add("hidden");
-    }
-
-    function showRanks() {
-      hideAll();
-      document.getElementById("rank-section").classList.remove("hidden");
-    }
-
-    function showModes() {
-      hideAll();
-      document.getElementById("mode-section").classList.remove("hidden");
-    }
-
-    function selectMode(mode) {
-      document.getElementById("mode-name").textContent = mode;
-      document.getElementById("mode-section").classList.add("hidden");
-      document.getElementById("crate-section").classList.remove("hidden");
-    }
-
     function purchase(item) {
-      alert("Zakupiono: " + item);
+      alert(`Zakupiono: ${item}`);
+      // In a real implementation, redirect to payment gateway
     }
   </script>
-
 </body>
 </html>
