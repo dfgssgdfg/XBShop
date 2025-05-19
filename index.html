@@ -27,11 +27,11 @@
     .button:hover {
       background-color: #00cc66;
     }
-    #mode-selection {
+    #mode-selection, #purchase-options {
       display: none;
       margin-top: 30px;
     }
-    .mode-button {
+    .mode-button, .item-button {
       background-color: #444;
       color: white;
       padding: 10px 20px;
@@ -41,7 +41,7 @@
       border-radius: 6px;
       cursor: pointer;
     }
-    .mode-button:hover {
+    .mode-button:hover, .item-button:hover {
       background-color: #00ff88;
       color: black;
     }
@@ -51,7 +51,7 @@
   <h1>Witaj na <strong>XBShop</strong>!</h1>
   <p>Kup rangę, skrzynię lub pakiet startowy do gry Minecraft</p>
 
-  <button class="button" onclick="alert('Wkrótce dostępne!')">Kup Rangę</button>
+  <button class="button" onclick="alert('Wybierz rangę z dostępnych opcji poniżej')">Kup Rangę</button>
   <button class="button" onclick="showModes()">Kup Skrzynię</button>
 
   <div id="mode-selection">
@@ -61,15 +61,32 @@
     <button class="mode-button" onclick="selectMode('Survival')">Survival</button>
   </div>
 
+  <div id="purchase-options">
+    <h2>Wybierz produkt do kupienia:</h2>
+    <button class="item-button" onclick="purchase('Skrzynia Startowa')">Skrzynia Startowa</button>
+    <button class="item-button" onclick="purchase('Skrzynia Premium')">Skrzynia Premium</button>
+    <button class="item-button" onclick="purchase('Skrzynia Legend')">Skrzynia Legend</button>
+    <br>
+    <button class="item-button" onclick="purchase('VIP')">Ranga VIP</button>
+    <button class="item-button" onclick="purchase('SVIP')">Ranga SVIP</button>
+    <button class="item-button" onclick="purchase('UVIP')">Ranga UVIP</button>
+    <button class="item-button" onclick="purchase('Lagger')">Ranga Lagger</button>
+    <button class="item-button" onclick="purchase('Lagger+')">Ranga Lagger+</button>
+  </div>
+
   <script>
+    let selectedMode = "";
+
     function showModes() {
       document.getElementById('mode-selection').style.display = 'block';
+      document.getElementById('purchase-options').style.display = 'none';
     }
 
     function selectMode(mode) {
-      alert("Wybrałeś skrzynię na tryb: " + mode + " (Wkrótce dostępne)");
-      // Tu w przyszłości wyślemy dane do backendu
+      selectedMode = mode;
+      document.getElementById('mode-selection').style.display = 'none';
+      document.getElementById('purchase-options').style.display = 'block';
     }
-  </script>
-</body>
-</html>
+
+    function purchase(item) {
+      alert("Kupiono: " + item + " na tryb: " + selectedMode + " (
