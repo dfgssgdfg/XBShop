@@ -78,6 +78,7 @@
     let selectedMode = "";
 
     function showModes() {
+      console.log("showModes()");  // dodałem debug, żeby widzieć w konsoli
       document.getElementById('mode-selection').style.display = 'block';
       document.getElementById('purchase-options').style.display = 'none';
     }
@@ -89,4 +90,9 @@
     }
 
     function purchase(item) {
-      alert("Kupiono: " + item + " na tryb: " + selectedMode + " (
+      alert("Kupiono: " + item + " na tryb: " + selectedMode + " (Wkrótce dodamy płatności i automatyczne nadanie rangi)");
+      // Później tu będzie fetch/post do backendu
+    }
+  </script>
+</body>
+</html>
