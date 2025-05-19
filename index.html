@@ -3,54 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XBacon - Rangi</title>
+  <title>XBacon - Strona Główna</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
   <style>
-    .option-button {
+    body {
+      background-image: url('https://i.imgur.com/3Z3Z3Z3.png'); /* Placeholder Minecraft grass texture */
+      background-attachment: fixed;
+      background-size: 64px 64px;
+    }
+    .minecraft-font {
+      font-family: 'Minecraftia', sans-serif;
+    }
+    .button {
       transition: transform 0.2s, background-color 0.3s;
     }
-    .option-button:hover {
-      transform: scale(1.05);
+    .button:hover {
+      transform: scale(1.05) translateY(-2px);
+    }
+    .fade-in {
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .status-box {
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #10B981;
+      backdrop-filter: blur(5px);
     }
   </style>
 </head>
 <body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col">
   <!-- Navigation -->
-  <nav class="bg-gray-800 p-4 shadow-lg">
+  <nav class="bg-gray-800 p-4 shadow-lg sticky top-0 z-10">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-green-400">XBacon</h1>
+      <h1 class="text-3xl minecraft-font text-green-400">XBacon</h1>
       <div class="space-x-4">
-        <a href="home.html" class="text-white hover:text-green-400">Strona Główna</a>
-        <a href="index.html" class="text-green-400 font-semibold">Rangi</a>
-        <a href="crates.html" class="text-white hover:text-green-400">Skrzynki i Pakiety</a>
+        <a href="index.html" class="text-green-400 font-semibold minecraft-font">Strona Główna</a>
+        <a href="ranks.html" class="text-white hover:text-green-400 minecraft-font">Rangi</a>
+        <a href="crates.html" class="text-white hover:text-green-400 minecraft-font">Skrzynki i Pakiety</a>
       </div>
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <main class="container mx-auto p-8 flex-grow flex flex-col items-center justify-center">
-    <h2 class="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">Witaj na XBacon!</h2>
-    <p class="text-lg mb-8 text-gray-300">Kup rangę i wesprzyj nasz serwer Minecraft!</p>
+  <!-- Hero Section -->
+  <main class="container mx-auto p-8 flex-grow flex flex-col items-center justify-center text-center">
+    <h2 class="text-5xl minecraft-font mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600 fade-in">Witaj na Serwerze XBacon!</h2>
+    <p class="text-xl mb-6 text-gray-200 max-w-2xl fade-in">Dołącz do najlepszej społeczności Minecraft! Graj w SkyGen, BoxPvP lub Survival i odblokuj ekskluzywne rangi oraz skrzynki, wspierając nasz serwer.</p>
+    <div class="flex flex-col sm:flex-row gap-4 fade-in">
+      <a href="ranks.html" class="button bg-green-500 text-black minecraft-font font-bold py-3 px-8 rounded-lg hover:bg-green-600 shadow-lg">Kup Rangę</a>
+      <a href="crates.html" class="button bg-gray-800 border-2 border-green-500 text-white minecraft-font py-3 px-8 rounded-lg hover:bg-green-500 hover:text-black shadow-lg">Kup Skrzynkę</a>
+    </div>
 
-    <div id="rank-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl">
-      <button class="option-button bg-gray-700 border-2 border-green-400 text-white py-4 px-6 rounded-lg hover:bg-green-400 hover:text-black" onclick="purchase('VIP')">VIP - 10 PLN</button>
-      <button class="option-button bg-gray-700 border-2 border-green-400 text-white py-4 px-6 rounded-lg hover:bg-green-400 hover:text-black" onclick="purchase('SVIP')">SVIP - 20 PLN</button>
-      <button class="option-button bg-gray-700 border-2 border-green-400 text-white py-4 px-6 rounded-lg hover:bg-green-400 hover:text-black" onclick="purchase('UVIP')">UVIP - 30 PLN</button>
-      <button class="option-button bg-gray-700 border-2 border-green-400 text-white py-4 px-6 rounded-lg hover:bg-green-400 hover:text-black" onclick="purchase('Lagger')">Lagger - 50 PLN</button>
-      <button class="option-button bg-gray-700 border-2 border-green-400 text-white py-4 px-6 rounded-lg hover:bg-green-400 hover:text-black" onclick="purchase('Lagger+')">Lagger+ - 75 PLN</button>
+    <!-- Server Status Widget -->
+    <div class="mt-12 status-box p-6 rounded-lg max-w-md w-full fade-in">
+      <h3 class="text-2xl minecraft-font text-green-400 mb-2">Status Serwera</h3>
+      <p class="text-lg">Adres: <span class="text-green-400">play.xbacon.pl</span></p>
+      <p class="text-lg">Gracze online: <span class="text-green-400">42/100</span></p>
+      <p class="text-sm text-gray-400 mt-2">Skopiuj IP i dołącz już teraz!</p>
     </div>
   </main>
 
   <!-- Footer -->
   <footer class="bg-gray-800 p-4 text-center text-gray-400">
-    <p>© 2025 XBacon. Wszystkie prawa zastrzeżone.</p>
+    <p class="minecraft-font">© 2025 XBacon. Wszystkie prawa zastrzeżone.</p>
   </footer>
-
-  <script>
-    function purchase(item) {
-      alert(`Zakupiono: ${item}`);
-      // In a real implementation, redirect to payment gateway
-    }
-  </script>
 </body>
 </html>
