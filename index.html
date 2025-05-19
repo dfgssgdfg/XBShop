@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -28,12 +27,49 @@
     .button:hover {
       background-color: #00cc66;
     }
+    #mode-selection {
+      display: none;
+      margin-top: 30px;
+    }
+    .mode-button {
+      background-color: #444;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: 1px solid #00ff88;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .mode-button:hover {
+      background-color: #00ff88;
+      color: black;
+    }
   </style>
 </head>
 <body>
   <h1>Witaj na <strong>XBShop</strong>!</h1>
   <p>Kup rangę, skrzynię lub pakiet startowy do gry Minecraft</p>
+
   <button class="button" onclick="alert('Wkrótce dostępne!')">Kup Rangę</button>
-  <button class="button" onclick="alert('Wkrótce dostępne!')">Kup Skrzynię</button>
+  <button class="button" onclick="showModes()">Kup Skrzynię</button>
+
+  <div id="mode-selection">
+    <h2>Wybierz tryb gry:</h2>
+    <button class="mode-button" onclick="selectMode('SkyGen')">SkyGen</button>
+    <button class="mode-button" onclick="selectMode('BoxPvP')">BoxPvP</button>
+    <button class="mode-button" onclick="selectMode('Survival')">Survival</button>
+  </div>
+
+  <script>
+    function showModes() {
+      document.getElementById('mode-selection').style.display = 'block';
+    }
+
+    function selectMode(mode) {
+      alert("Wybrałeś skrzynię na tryb: " + mode + " (Wkrótce dostępne)");
+      // Tu w przyszłości wyślemy dane do backendu
+    }
+  </script>
 </body>
 </html>
