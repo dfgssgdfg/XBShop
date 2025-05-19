@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XBacon - Rangi</title>
+  <title>XBacon - Skrzynki i Pakiety</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
   <style>
@@ -33,23 +33,33 @@
       <h1 class="text-3xl minecraft-font text-green-400">XBacon</h1>
       <div class="space-x-4">
         <a href="index.html" class="text-white hover:text-green-400 minecraft-font">Strona Główna</a>
-        <a href="ranks.html" class="text-green-400 font-semibold minecraft-font">Rangi</a>
-        <a href="crates.html" class="text-white hover:text-green-400 minecraft-font">Skrzynki i Pakiety</a>
+        <a href="ranks.html" class="text-white hover:text-green-400 minecraft-font">Rangi</a>
+        <a href="crates.html" class="text-green-400 font-semibold minecraft-font">Skrzynki i Pakiety</a>
       </div>
     </div>
   </nav>
 
   <!-- Main Content -->
-  <main class="container mx-auto p-8 flex-grow flex flex-col items-center justify-center">
-    <h2 class="text-4xl minecraft-font mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600 fade-in">Wesprzyj XBacon!</h2>
-    <p class="text-lg mb-8 text-gray-200 fade-in minecraft-font">Kup rangę i odblokuj ekskluzywne korzyści na serwerze!</p>
+  <main class="container mx-auto p-8 flex-grow flex flex-col items-center">
+    <h2 class="text-4xl minecraft-font mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600 fade-in">Skrzynki i Pakiety</h2>
+    <p class="text-lg mb-8 text-gray-200 fade-in minecraft-font">Wybierz tryb gry i kup skrzynkę lub pakiet!</p>
 
-    <div id="rank-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl fade-in">
-      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('VIP')">VIP - 10 PLN</button>
-      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('SVIP')">SVIP - 20 PLN</button>
-      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('UVIP')">UVIP - 30 PLN</button>
-      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Lagger')">Lagger - 50 PLN</button>
-      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Lagger+')">Lagger+ - 75 PLN</button>
+    <div id="mode-section" class="mb-8 fade-in">
+      <h3 class="text-2xl minecraft-font mb-4">Wybierz tryb:</h3>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-3 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="selectMode('SkyGen')">SkyGen</button>
+        <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-3 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="selectMode('BoxPvP')">BoxPvP</button>
+        <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-3 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="selectMode('Survival')">Survival</button>
+      </div>
+    </div>
+
+    <div id="crate-section" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl fade-in">
+      <h3 class="text-2xl minecraft-font mb-4 col-span-full">Skrzynki dla trybu <span id="mode-name"></span>:</h3>
+      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Skrzynia Startowa')">Skrzynia Startowa - 5 PLN</button>
+      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Skrzynia Premium')">Skrzynia Premium - 15 PLN</button>
+      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Skrzynia Legend')">Skrzynia Legend - 25 PLN</button>
+      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Pakiet Startowy')">Pakiet Startowy - 10 PLN</button>
+      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Pakiet Pro')">Pakiet Pro - 30 PLN</button>
     </div>
   </main>
 
@@ -59,6 +69,12 @@
   </footer>
 
   <script>
+    function selectMode(mode) {
+      document.getElementById("mode-name").textContent = mode;
+      document.getElementById("crate-section").classList.remove("hidden");
+      document.getElementById("mode-section").classList.add("hidden");
+    }
+
     function purchase(item) {
       alert(`Zakupiono: ${item}`);
       // W rzeczywistej implementacji przekieruj do bramki płatniczej
