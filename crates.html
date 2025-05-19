@@ -7,22 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
   <style>
-    body {
-      background-image: url('https://i.imgur.com/3Z3Z3Z3.png'); /* Minecraft grass texture */
-      background-attachment: fixed;
-      background-size: 64px 64px;
-      position: relative;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-      z-index: -1;
-    }
     .minecraft-font {
       font-family: 'Minecraftia', sans-serif;
     }
@@ -42,7 +26,7 @@
     }
   </style>
 </head>
-<body class="text-white font-sans min-h-screen flex flex-col">
+<body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col">
   <!-- Navigation -->
   <nav class="bg-gray-900 p-4 shadow-lg sticky top-0 z-10">
     <div class="container mx-auto flex justify-between items-center">
@@ -73,7 +57,7 @@
       <h3 class="text-2xl minecraft-font mb-4 col-span-full">Skrzynki dla trybu <span id="mode-name"></span>:</h3>
       <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Skrzynia Startowa')">Skrzynia Startowa - 5 PLN</button>
       <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Skrzynia Premium')">Skrzynia Premium - 15 PLN</button>
-      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text black shadow-lg" onclick="purchase('Skrzynia Legend')">Skrzynia Legend - 25 PLN</button>
+      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Skrzynia Legend')">Skrzynia Legend - 25 PLN</button>
       <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Pakiet Startowy')">Pakiet Startowy - 10 PLN</button>
       <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Pakiet Pro')">Pakiet Pro - 30 PLN</button>
     </div>
