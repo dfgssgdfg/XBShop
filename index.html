@@ -6,6 +6,7 @@
   <title>XBacon - Strona Główna</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/gh/leonardosnt/mc-player-counter/dist/mc-player-counter.min.js"></script>
   <style>
     .minecraft-font {
       font-family: 'Minecraftia', sans-serif;
@@ -70,8 +71,8 @@
     <!-- Server Status Widget -->
     <div class="mt-12 status-box p-6 rounded-lg max-w-md w-full fade-in">
       <h3 class="text-2xl minecraft-font text-green-400 mb-2">Status Serwera</h3>
-      <p class="text-lg minecraft-font">Adres: <span class="text-green-400 cursor-pointer" onclick="copyIP('play.xbacon.pl')">play.xbacon.pl</span></p>
-      <p class="text-lg minecraft-font">Gracze online: <span class="text-green-400">42/100</span></p>
+      <p class="text-lg minecraft-font">Adres: <span class="text-green-400 cursor-pointer" onclick="copyIP('xbacon19.csrv.gg')">xbacon19.csrv.gg</span></p>
+      <p class="text-lg minecraft-font">Gracze online: <span class="text-green-400" data-playercounter-ip="xbacon19.csrv.gg" data-playercounter-format="{online}/{max}">0/0</span></p>
       <p class="text-sm text-gray-400 mt-2 minecraft-font">Kliknij IP, aby skopiować!</p>
     </div>
   </main>
