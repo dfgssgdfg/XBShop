@@ -8,18 +8,30 @@
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
   <style>
     body {
-      background-image: url('https://i.imgur.com/3Z3Z3Z3.png'); /* Placeholder Minecraft grass texture */
+      background-image: url('https://i.imgur.com/3Z3Z3Z3.png'); /* Minecraft grass texture */
       background-attachment: fixed;
       background-size: 64px 64px;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+      z-index: -1;
     }
     .minecraft-font {
       font-family: 'Minecraftia', sans-serif;
     }
     .option-button {
-      transition: transform 0.2s, background-color 0.3s;
+      transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.2s ease;
     }
     .option-button:hover {
-      transform: scale(1.05) translateY(-2px);
+      transform: scale(1.1) translateY(-3px);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
     }
     .fade-in {
       animation: fadeIn 1s ease-in;
@@ -30,9 +42,9 @@
     }
   </style>
 </head>
-<body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col">
+<body class="text-white font-sans min-h-screen flex flex-col">
   <!-- Navigation -->
-  <nav class="bg-gray-800 p-4 shadow-lg sticky top-0 z-10">
+  <nav class="bg-gray-900 p-4 shadow-lg sticky top-0 z-10">
     <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-3xl minecraft-font text-green-400">XBacon</h1>
       <div class="space-x-4">
@@ -46,29 +58,29 @@
   <!-- Main Content -->
   <main class="container mx-auto p-8 flex-grow flex flex-col items-center">
     <h2 class="text-4xl minecraft-font mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600 fade-in">Skrzynki i Pakiety</h2>
-    <p class="text-lg mb-8 text-gray-200 fade-in">Wybierz tryb gry i kup skrzynkę lub pakiet!</p>
+    <p class="text-lg mb-8 text-gray-200 fade-in minecraft-font">Wybierz tryb gry i kup skrzynkę lub pakiet!</p>
 
     <div id="mode-section" class="mb-8 fade-in">
       <h3 class="text-2xl minecraft-font mb-4">Wybierz tryb:</h3>
       <div class="flex flex-wrap justify-center gap-4">
-        <button class="option-button bg-gray-800 border-2 border-green-500 text-white minecraft-font py-3 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="selectMode('SkyGen')">SkyGen</button>
-        <button class="option-button bg-gray-800 border-2 border-green-500 text-white minecraft-font py-3 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="selectMode('BoxPvP')">BoxPvP</button>
-        <button class="option-button bg-gray-800 border-2 border-green-500 text-white minecraft-font py-3 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="selectMode('Survival')">Survival</button>
+        <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-3 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="selectMode('SkyGen')">SkyGen</button>
+        <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-3 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="selectMode('BoxPvP')">BoxPvP</button>
+        <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-3 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="selectMode('Survival')">Survival</button>
       </div>
     </div>
 
     <div id="crate-section" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl fade-in">
       <h3 class="text-2xl minecraft-font mb-4 col-span-full">Skrzynki dla trybu <span id="mode-name"></span>:</h3>
-      <button class="option-button bg-gray-800 border-2 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Skrzynia Startowa')">Skrzynia Startowa - 5 PLN</button>
-      <button class="option-button bg-gray-800 border-2 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Skrzynia Premium')">Skrzynia Premium - 15 PLN</button>
-      <button class="option-button bg-gray-800 border-2 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Skrzynia Legend')">Skrzynia Legend - 25 PLN</button>
-      <button class="option-button bg-gray-800 border-2 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Pakiet Startowy')">Pakiet Startowy - 10 PLN</button>
-      <button class="option-button bg-gray-800 border-2 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Pakiet Pro')">Pakiet Pro - 30 PLN</button>
+      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Skrzynia Startowa')">Skrzynia Startowa - 5 PLN</button>
+      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Skrzynia Premium')">Skrzynia Premium - 15 PLN</button>
+      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text black shadow-lg" onclick="purchase('Skrzynia Legend')">Skrzynia Legend - 25 PLN</button>
+      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Pakiet Startowy')">Pakiet Startowy - 10 PLN</button>
+      <button class="option-button bg-gray-800 border-3 border-green-500 text-white minecraft-font py-4 px-6 rounded-lg hover:bg-green-500 hover:text-black shadow-lg" onclick="purchase('Pakiet Pro')">Pakiet Pro - 30 PLN</button>
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 p-4 text-center text-gray-400">
+  <footer class="bg-gray-900 p-4 text-center text-gray-400">
     <p class="minecraft-font">© 2025 XBacon. Wszystkie prawa zastrzeżone.</p>
   </footer>
 
